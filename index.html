@@ -121,7 +121,7 @@ footer{text-align:center;padding:25px;background:#3d111e;color:white;font-size:1
 <footer>© 2026 Jivani Navratri Collections • Vasco da Gama, Goa</footer>
 
 <script>
-const repoApi = "https://api.github.com/repos/rishabjivani53-droid/jivani-navratri-collections/contents/navratri%20products?ref=main";
+const repoApi = "https://api.github.com/repos/rishabjivani53-droid/jivani-navratri-collections/contents/?ref=main";navratri%20prducts
 const products = document.getElementById("products");
 
 function isImage(name){
@@ -133,7 +133,7 @@ async function loadProducts(){
     const response = await fetch(repoApi, {cache:"no-store"});
     if(!response.ok) throw new Error("Could not load products");
     const files = await response.json();
-    const images = files.filter(f => f.type === "file" && isImage(f.name));
+    const images = files.filter(f => f.type === "file" && /^image\s+\d+$/i.test(f.name));
 
     if(!images.length){
       products.innerHTML = '<div class="loading">No product photos found yet. Please check the Navratri products folder.</div>';
